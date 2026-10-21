@@ -69,7 +69,7 @@ LeetCode Recall helps software engineers and algorithm practitioners revisit sol
    npm run dev
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000).
+6. Open [http://localhost:3000]([http://localhost:3000](https://leetcode-recall.vercel.app/)).
 
 For full step-by-step dashboard instructions, see [SETUP.md](./SETUP.md).
 
