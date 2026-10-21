@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { validatePassword } from "@/lib/auth-helpers";
 import { Navbar } from "@/components/Navbar";
-import { Lock, AlertCircle, CheckCircle2, Loader2, ArrowLeft, KeyRound } from "lucide-react";
+import {
+  Lock,
+  AlertCircle,
+  CheckCircle2,
+  Loader2,
+  ArrowLeft,
+  KeyRound,
+  MailWarning,
+} from "lucide-react";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -15,6 +23,18 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [hasSession, setHasSession] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    async function checkSession() {
+      const supabase = createClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setHasSession(!!session);
+    }
+    checkSession();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,7 +94,25 @@ export default function ResetPasswordPage() {
             </p>
           </div>
 
-          {success ? (
+          {hasSession === false ? (
+            <div className="p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 space-y-3">
+              <div className="flex items-center gap-2 text-amber-900 dark:text-amber-300 font-bold text-sm">
+                <MailWarning className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
+                Password Reset Unavailable
+              </div>
+              <p className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed">
+                Password reset via email is currently unavailable because email sending has not been configured with a custom SMTP provider in your Supabase project dashboard.
+              </p>
+              <div className="pt-2 text-center">
+                <Link
+                  href="/login"
+                  className="btn-yellow px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow-sm"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" /> Back to Log In
+                </Link>
+              </div>
+            </div>
+          ) : success ? (
             <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800 text-center space-y-2">
               <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mx-auto" />
               <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">

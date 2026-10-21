@@ -31,7 +31,7 @@ This guide provides exact, beginner-friendly instructions for configuring **Leet
 2. Under **Configuration**, click **Providers**.
 3. Click on the **Email** provider:
    - Ensure **"Enable Email provider"** is **ON**.
-   - Ensure **"Confirm email"** is **ON** (so new users must verify their email before sign-in).
+   - Turn **"Confirm email"** to **OFF** (enables immediate signup and dashboard access without requiring email confirmation links).
    - Ensure **"Secure email change"** is enabled.
 4. Click **Save** at the bottom of the Email section.
 

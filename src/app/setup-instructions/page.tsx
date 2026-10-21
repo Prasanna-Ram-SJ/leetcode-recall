@@ -56,7 +56,7 @@ export default function SetupInstructionsPage() {
             <li>In your Supabase dashboard, click <strong>Authentication</strong> on the left sidebar.</li>
             <li>Under Configuration, select <strong>Providers</strong> &rarr; click on <strong>Email</strong>.</li>
             <li>Ensure <strong>&quot;Enable Email provider&quot;</strong> is turned <strong>ON</strong>.</li>
-            <li>Ensure <strong>&quot;Confirm email&quot;</strong> is turned <strong>ON</strong> so that new accounts must verify their email before sign-in.</li>
+            <li>Turn <strong>OFF</strong> the toggle for <strong>&quot;Confirm email&quot;</strong> so users can sign up and immediately access their dashboard without waiting for email confirmation.</li>
             <li>Click <strong>Save</strong> at the bottom.</li>
           </ol>
         </section>
